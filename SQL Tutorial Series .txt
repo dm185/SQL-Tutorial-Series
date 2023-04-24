@@ -1,0 +1,103 @@
+CREATE TABLE employees1 (
+id INT PRIMARY KEY,
+first_name VARCHAR(30),
+last_name VARCHAR(30),
+gender VARCHAR(10),
+age INT,
+salary INT);
+
+CREATE TABLE employees2 (
+id INT PRIMARY KEY,
+first_name VARCHAR(30),
+last_name VARCHAR(30),
+gender VARCHAR(10),
+age INT,
+salary INT);
+
+INSERT INTO employees1 VALUES
+(001, 'John', 'Adams', 'Male', 47, 89000),
+(002, 'Sarah', 'Wilks', 'Female', 38, 91000),
+(003, 'Mike', 'Wilkinson', 'Male', 51, 101000),
+(004, 'Jennifer','Cambpell', 'Female', 41, 58000),
+(005, 'Chloe','Drake', 'Female', 29, 76500),
+(006, 'Solomon', 'Bryant','Male', 31, 85000),
+(007, 'Sean', 'DeJoung', 'Male', 49, 64500),
+(008, 'Woody', 'Larson', 'Male', 34, 88500);
+
+INSERT INTO employees2 VALUES
+(001, 'Siebert', 'Shines', 'Male', 58, 105000),
+(002, 'Sarah', 'Wilks', 'Female', 38, 18000),
+(003, 'Colbert', 'Shackner', 'Male', 29, 63500),
+(004, 'DonLee', 'Miller', 'Male', 48, 27500),
+(005, 'Woody', 'Larson', 'Male', 34, 24500),
+(006, 'Lisa', 'Mayor', 'Female', 44, 55400),
+(007, 'Sean', 'DeJoung', 'Male', 49, 33000),
+(008, 'Bryan', 'Wagner', 'Male', 47, 110000);
+
+
+CREATE TABLE members(
+id INT PRIMARY KEY,
+first_name VARCHAR(30),
+last_name VARCHAR(30),
+city VARCHAR(30),
+age INT,
+gender VARCHAR(10),
+membership_id VARCHAR(10));
+
+INSERT INTO members VALUES
+(1, 'Sam', 'Bruner', 'Bellevue', 39, 'Male', 'B100'),
+(2, 'Leslie', 'Howel', 'Kirkland', 33, 'Female', 'G100'),
+(3, 'Eric', 'Mueler', 'Bellingham', 55, 'Male', Null),
+(4, 'Frederick', 'Carlson', 'Seattle', 41, 'Male', 'P100'),
+(5, 'John', 'Capple', 'Kirkland', 51, 'Male', 'P100'),
+(6, 'Vanessa', 'Bergroth', 'Bellevue', 31, 'Female', 'G100'),
+(7, 'Chloe', 'Wang', 'Kirkland', 33, 'Female', 'B100'),
+(8, 'Donny', 'Paget', 'Bellevue', 49, 'Male', Null),
+(9, 'Carol', 'Spice', 'Seattle', 54, 'Female', 'G100'),
+(10, 'Samantha', 'Watkins', 'Seattle', 30, 'Female', Null);
+  
+CREATE TABLE memberships(
+membership_id VARCHAR(10) PRIMARY KEY,
+class VARCHAR(20) NOT NULL,
+monthly_dues DECIMAL(5, 2));
+
+INSERT INTO memberships VALUES
+('B100', 'Basic', 48.99),
+('BP100', 'Basic Plus', 60.00),
+('BZ100', 'Bronze', 100.50),
+('S100', 'Silver', 125.50),
+('G100', 'Gold', 150.00),
+('P100', 'Platinum', 175.00);
+
+ALTER TABLE members
+ADD FOREIGN KEY(membership_id)
+REFERENCES memberships (membership_id);
+
+ALTER TABLE members
+ADD referred_by INT;
+
+UPDATE MEMBERS 
+SET referred_by = 2
+WHERE id IN(3,6, 7);
+
+UPDATE MEMBERS 
+SET referred_by = 4
+WHERE id IN(5, 8);
+
+UPDATE members 
+SET referred_by = 5
+WHERE id IN(9, 10); 
+
+CREATE TABLE employees3(
+id INT PRIMARY KEY,
+first_name VARCHAR(30),
+last_name VARCHAR(30),
+gender INT,
+age VARCHAR(3));
+ 
+INSERT INTO employees3 VALUES
+(1, 'Blake', 'Smiley', 0, '33'),
+(2, 'Drew', 'Bower', 0, '38');
+
+INSERT INTO employees3 VALUES
+(3, 'Woody', 'Larson', 0, '34');
